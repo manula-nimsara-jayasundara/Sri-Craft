@@ -1,0 +1,241 @@
+:root {
+    --primary-color: #005A5B;
+    /* Peacock Teal */
+    --secondary-color: #D4AF37;
+    /* Muted Gold/Cinnamon */
+    --accent-color: #FF5733;
+    /* Sunset Orange */
+    --light-bg: #FDFBF5;
+    /* Temple Flower Cream */
+    --text-dark: #3B3A38;
+    /* Dark Clay */
+    --text-light: #6D6D6D;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-bg);
+    /* Subtle background pattern inspired by 'liya vela' */
+    background-image: url("assets/images/background.jpg");
+    color: var(--text-dark);
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Navbar */
+.navbar {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-brand {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+/* Hero Section */
+.hero-section {
+    background-image: url('/assets/images/background.jpg');
+    background-size: cover;
+    color: white;
+    padding: 120px 0;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 4.5rem;
+    color: #fff;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.hero-section p {
+    font-size: 1.3rem;
+    max-width: 600px;
+    margin: 1rem auto;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    padding: 12px 30px;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #E64A22;
+    border-color: #E64A22;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Section Titles */
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title h2 {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 15px;
+    font-size: 2.5rem;
+}
+
+.section-title h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    width: 80px;
+    height: 4px;
+    background-color: var(--secondary-color);
+    border-radius: 2px;
+}
+
+/* Product Card */
+.product-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+.product-card .card-img-top {
+    border-radius: 10px 10px 0 0;
+    height: 220px;
+    object-fit: cover;
+}
+
+.product-card .card-body {
+    padding: 1.25rem;
+}
+
+.product-card .card-title {
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.product-card .card-text {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.product-card .price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.product-card .btn-view {
+    background-color: var(--secondary-color);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 5px 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.product-card .btn-view:hover {
+    background-color: #B89B2E;
+}
+
+/* Artisan Card */
+.artisan-card {
+    text-align: center;
+    padding: 1rem;
+}
+
+.artisan-card img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--secondary-color);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.artisan-card:hover img {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.artisan-card h5 {
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+.artisan-card p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Filter Controls */
+#filter-controls {
+    background-color: #fff;
+    padding: 1.5rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2.5rem;
+}
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(0, 90, 91, 0.2);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--text-dark);
+    color: var(--light-bg);
+    padding: 50px 0 30px;
+}
+
+.footer a {
+    color: var(--light-bg);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+
+
+
+

@@ -1,0 +1,66 @@
+body {
+    /* Trendy gradient background */
+    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+    font-family: "Inter", sans-serif; /* Use Inter font */
+    min-height: 100vh; /* Ensure body takes full viewport height */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 15px; /* Add some padding on smaller screens */
+}
+
+.card {
+    border-radius: 25px; /* More rounded corners for a trendier look */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Softer, larger shadow */
+    border: none; /* Remove default card border */
+    background-color: #ffffff; /* Ensure white background for card */
+    max-width: 450px; /* Max width for this card */
+    width: 100%; /* Make card responsive */
+}
+
+/* Responsive adjustments for card width on very small screens */
+@media (max-width: 576px) {
+    .card {
+        max-width: 95%; /* Adjust max-width for very small screens */
+    }
+}
+
+.logo-img {
+    max-width: 120px; /* Consistent logo size */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure it's a block element for margin auto */
+    margin: 0 auto 20px auto; /* Center the logo and add bottom margin */
+}
+
+.form-control {
+    border-radius: 10px; /* Slightly more rounded inputs */
+    border: 1px solid #ced4da; /* Default border */
+    transition: all 0.3s ease; /* Smooth transition for focus */
+    padding: 10px 15px; /* Adjust padding for better look */
+}
+
+.form-control:focus {
+    border-color: #80bdff; /* Bootstrap's default focus color */
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* Default focus shadow */
+}
+
+.btn-primary {
+    /* Trendy gradient button */
+    background: linear-gradient(45deg, #0d6efd, #00b0ff);
+    border: none;
+    border-radius: 15px; /* More rounded button */
+    padding: 12px 25px; /* Larger padding for better touch targets */
+    font-size: 1.1rem; /* Slightly larger font */
+    box-shadow: 0 5px 15px rgba(0, 176, 255, 0.3); /* Button shadow */
+    transition: all 0.3s ease; /* Smooth transition for hover */
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px); /* Slight lift effect on hover */
+    box-shadow: 0 8px 20px rgba(0, 176, 255, 0.4); /* More pronounced shadow on hover */
+    background: linear-gradient(45deg, #00b0ff, #0d6efd); /* Reverse gradient on hover */
+}
+
+.invalid-feedback {
+    font-size: 0.875em; /* Standard size for feedback */
+}
