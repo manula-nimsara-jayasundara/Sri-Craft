@@ -31,38 +31,70 @@ public class SignIn extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User u = new User();
         Gson gson = new Gson();
-        JsonObject responseObject = new JsonObject();
-        responseObject.addProperty("status", false);
-        HttpSession ses = request.getSession();
-
         JsonObject user = gson.fromJson(request.getReader(), JsonObject.class);
         String email = user.get("email").getAsString();
         String password = user.get("password").getAsString();
 
+        JsonObject responseObject = new JsonObject();
+        responseObject.addProperty("status", false);
+
         if (email.isEmpty()) {
-            responseObject.addProperty("alerts", "Please enter your email!");
+            responseObject.addProperty("message", "Please enter your email!");
         } else if (password.isEmpty()) {
-            responseObject.addProperty("alerts", "Please enter your password!");
+            responseObject.addProperty("message", "Please enter your password!");
         } else {
-            if (ses.getAttribute("email") == null) {
 
-                SessionFactory sf = HibernateUtil.getSessionFactory();
-                Session s = sf.openSession();
-                Criteria c1 = s.createCriteria(User.class);
-                Criterion crt1 = Restrictions.eq("email", email);
-                Criterion crt2 = Restrictions.eq("password", password);
+            SessionFactory sf = HibernateUtil.getSessionFactory();
+            Session s = sf.openSession();
+            
+            Criteria c1 = s.createCriteria(User.class);
+            
+            Criterion crt1 = Restrictions.eq("email", email);
+            Criterion crt2 = Restrictions.eq("password", password);
 
-                c1.add(crt1);
-                c1.add(crt2);
+            c1.add(crt1);
+            c1.add(crt2);
 
-                if (c1.list().isEmpty()) {
-                    responseObject.addProperty("alerts", 1);
+            if (c1.list().isEmpty()) {
+                responseObject.addProperty("message", "Email not found!");
+            } else {
+                User u=(User)c1.list().get(0);
+                HttpSession ses = request.getSession();
+                responseObject.addProperty("status", true);
+
+                if (!u.getVerification().equals("Verified")) {
+                    ses.setAttribute("email", email);
+
+                    responseObject.addProperty("message", "1");
+                } else {
+                    ses.setAttribute("user", u);
+                    responseObject.addProperty("message", "2");
                 }
+
             }
+            s.close();
+
+        }
+        String toJson = gson.toJson(responseObject);
+        response.setContentType("application/json");
+        response.getWriter().write(toJson);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        JsonObject responseObject = new JsonObject();
+
+        if (request.getSession().getAttribute("user") != null) {
+            responseObject.addProperty("message", "1");
+        } else {
+            responseObject.addProperty("message", "2");
         }
 
+        Gson gson = new Gson();
+        String toJson = gson.toJson(responseObject);
+        response.setContentType("application/json");
+        response.getWriter().write(toJson);
     }
 
 }

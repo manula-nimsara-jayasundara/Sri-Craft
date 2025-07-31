@@ -22,4 +22,16 @@ public class Util {
         int c = (int) (Math.random() * 1000000);
         return String.format("%06d", c);
     }
+
+    public static boolean isCodeValid(String code) {
+        return code.matches("^\\d{4,5}$");
+    }
+
+    public static boolean isIntger(String value) {
+        return value.matches("^\\d+$");
+    }
+
+    public static boolean isDouble(String text) {
+        return text.matches("^\\d+(\\.\\d{2})?$");
+    }
 }

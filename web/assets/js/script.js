@@ -203,6 +203,11 @@ document.addEventListener('DOMContentLoaded', function () {
             showMessageBox('Verification successful! Code: ' + code);
             verificationForm.reset(); // Clear the form
         }
+
+        if (isValid == false) {
+            showMessageBox('Verification faild');
+            verificationForm.reset();
+        }
     });
 
     resendCodeLink.addEventListener('click', function (event) {
@@ -290,11 +295,16 @@ document.addEventListener('DOMContentLoaded', function () {
             isValid = false;
         }
 
-        if (isValid) {
-            // If validation passes, simulate sign-in
-            showMessageBox('Sign in successful! (Credentials would be sent to server)');
-            signinForm.reset(); // Clear the form
-        }
+//        if (isValid) {
+//            // If validation passes, simulate sign-in
+//            showMessageBox('Sign in successful! (Credentials would be sent to server)');
+//            signinForm.reset(); // Clear the form
+//        }
+
+//        if (!isValid) {
+//            showMessageBox('Please check your email and password, try again!');
+//            signinForm.reset();
+//        }
     });
 
     /**

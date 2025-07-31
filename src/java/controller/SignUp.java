@@ -45,17 +45,17 @@ public class SignUp extends HttpServlet {
         responseObject.addProperty("status", false);
 
         if (firstName.isEmpty()) {
-            responseObject.addProperty("alerts", "Please enter your first name!");
+            responseObject.addProperty("message", "Please enter your first name!");
         } else if (lastName.isEmpty()) {
-            responseObject.addProperty("alerts", "Please enter your last name!");
+            responseObject.addProperty("message", "Please enter your last name!");
         } else if (email.isEmpty()) {
-            responseObject.addProperty("alerts", "Please enter your email!");
+            responseObject.addProperty("message", "Please enter your email!");
         } else if (!Util.isEmailValid(email)) {
-            responseObject.addProperty("alerts", "Invalid email or password!");
+            responseObject.addProperty("message", "Invalid email or password!");
         } else if (password.isEmpty()) {
-            responseObject.addProperty("alerts", "Please enter a password!");
+            responseObject.addProperty("message", "Please enter a password!");
         } else if (!Util.isPasswordValid(password)) {
-            responseObject.addProperty("alerts", "The password must conatain at least one uppercase, lowercase, number, "
+            responseObject.addProperty("message", "The password must conatain at least one uppercase, lowercase, number, "
                     + "special character and must be at least 8 characters long!");
         } else {
             // hibernate save
@@ -67,7 +67,7 @@ public class SignUp extends HttpServlet {
             criteria.add(Restrictions.eq("email", email));
 
             if (!criteria.list().isEmpty()) {
-                responseObject.addProperty("alerts", "User with this Email already exists!!");
+                responseObject.addProperty("message", "User with this Email already exists!!");
             } else {
                 User u1 = new User();
                 u1.setFirstName(firstName);
@@ -96,7 +96,7 @@ public class SignUp extends HttpServlet {
                 ses.setAttribute("email", email);
                 //session-management-end
                 responseObject.addProperty("status", true);
-                responseObject.addProperty("alerts", "Registration success. Please check your email for the verfication code");
+                responseObject.addProperty("message", "Registration success. Please check your email for the verfication code");
             }
             
             s.close();

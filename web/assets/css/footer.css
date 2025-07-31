@@ -1,0 +1,77 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif; /* Using Inter font as per instructions */
+}
+
+.footer {
+    background-color: #343a40; /* Dark background for a modern look */
+    color: #e9ecef; /* Light text color for contrast */
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    border-radius: 0.5rem 0.5rem 0 0; /* Rounded top corners for the footer */
+}
+
+.footer h5, .footer h6 {
+    color: #ffffff; /* White headings */
+}
+
+.footer p, .footer li a {
+    color: #ced4da !important; /* Lighter text for paragraphs and links */
+    font-size: 0.95rem;
+}
+
+.footer a {
+    transition: color 0.3s ease-in-out;
+    border-radius: 0.25rem; /* Rounded corners for links */
+}
+
+.footer a:hover {
+    color: #0dcaf0 !important; /* Bootstrap's info color for hover, or choose your accent color */
+}
+
+.footer .list-unstyled li {
+    margin-bottom: 0.5rem;
+}
+
+.footer .text-muted i {
+    color: #adb5bd; /* Slightly desaturated icons */
+}
+
+.footer .fab {
+    font-size: 1.5rem; /* Larger social icons */
+    transition: color 0.3s ease-in-out;
+}
+
+.footer .fab:hover {
+    color: #0dcaf0 !important; /* Accent color on hover for social icons */
+}
+
+/* Optional: Subtle border top for the footer if desired */
+/* .footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+} */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer .col-md-4,
+    .footer .col-md-2 {
+        text-align: center;
+    }
+    .footer .list-unstyled {
+        padding-left: 0;
+    }
+}
+
+/* Styling for the main content area to push footer down */
+.main-content-placeholder {
+    min-height: 80vh;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem; /* Rounded corners for the content area */
+    margin-bottom: 1rem; /* Space between content and footer */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Subtle shadow */
+}

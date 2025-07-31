@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Account - Smart Trade</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome for Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <!-- Custom CSS embedded here -->
+        <link rel="stylesheet" href="assets/css/styles.css">
+
+        <style>
+            body {
+                background-color: #f0f2f5; /* Light gray background */
+                font-family: "Inter", sans-serif; /* Use Inter font */
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* Main Content Area */
+            .main-content-area {
+                flex-grow: 1; /* Allows content to take available space */
+                padding: 30px 15px; /* Padding for the main content, adjusted for no navbar */
+            }
+
+            /* Breadcrumbs */
+            .breadcrumb-custom {
+                background-color: transparent;
+                padding: 15px 0;
+                font-size: 0.95rem;
+                color: #6c757d;
+            }
+            .breadcrumb-item + .breadcrumb-item::before {
+                content: "/";
+                padding-right: 0.5rem;
+                color: #6c757d;
+            }
+            .breadcrumb-item a {
+                color: #0d6efd;
+                text-decoration: none;
+            }
+            .breadcrumb-item.active {
+                color: #333;
+                font-weight: 500;
+            }
+
+            /* User Profile Summary */
+            .profile-summary {
+                display: flex;
+                align-items: center;
+                background-color: #fff;
+                border-radius: 15px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                padding: 20px;
+                margin-bottom: 25px;
+            }
+            .profile-summary .avatar {
+                font-size: 3rem; /* Size of the emoji avatar */
+                margin-right: 20px;
+            }
+            .profile-summary h4 {
+                margin-bottom: 5px;
+                color: #333;
+            }
+            .profile-summary p {
+                margin-bottom: 0;
+                color: #6c757d;
+                font-size: 0.9rem;
+            }
+
+            /* Top Navigation Tabs (formerly Sidebar) */
+            .nav-tabs-custom {
+                background-color: #fff;
+                border-radius: 15px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                margin-bottom: 25px; /* Space below the tabs */
+                padding: 10px 20px; /* Padding inside the tab container */
+                border-bottom: none; /* Remove default Bootstrap border */
+            }
+            .nav-tabs-custom .nav-item {
+                margin-bottom: 0; /* Remove default margin */
+            }
+            .nav-tabs-custom .nav-link {
+                border: none;
+                border-radius: 10px; /* Rounded corners for individual tabs */
+                padding: 10px 15px;
+                margin: 0 5px; /* Space between tabs */
+                color: #555;
+                font-weight: 500;
+                transition: background-color 0.2s ease, color 0.2s ease;
+                display: flex; /* Use flex for icon and text alignment */
+                align-items: center;
+            }
+            .nav-tabs-custom .nav-link i {
+                margin-right: 8px;
+                color: #6c757d;
+            }
+            .nav-tabs-custom .nav-link:hover {
+                background-color: #f0f2f5;
+                color: #0d6efd;
+            }
+            .nav-tabs-custom .nav-link.active {
+                background-color: #e0f2fe; /* Light blue background for active tab */
+                color: #0d6efd; /* Blue text for active tab */
+                border-bottom: 3px solid #0d6efd; /* Blue underline for active tab */
+                font-weight: 600;
+            }
+            .nav-tabs-custom .nav-link.active i {
+                color: #0d6efd; /* Blue icon for active tab */
+            }
+
+            /* Main Form Content */
+            .form-section {
+                background-color: #fff;
+                border-radius: 15px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                padding: 30px;
+            }
+            .form-section h5 {
+                margin-bottom: 20px;
+                color: #333;
+                font-weight: 600;
+            }
+            .form-control {
+                border-radius: 10px; /* Rounded inputs */
+                padding: 10px 15px;
+                border: 1px solid #e0e0e0;
+            }
+            .form-control:focus {
+                border-color: #0d6efd;
+                box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            }
+            .btn-primary {
+                background: linear-gradient(45deg, #0d6efd, #00b0ff);
+                border: none;
+                border-radius: 15px;
+                padding: 12px 25px;
+                font-size: 1.1rem;
+                box-shadow: 0 5px 15px rgba(0, 176, 255, 0.3);
+                transition: all 0.3s ease;
+            }
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(0, 176, 255, 0.4);
+                background: linear-gradient(45deg, #00b0ff, #0d6efd);
+            }
+
+            /* Footer-like Features Section */
+            .features-section {
+                background-color: #fff;
+                padding: 40px 20px;
+                margin-top: 30px;
+                border-top: 1px solid #eee; /* Separator from main content */
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap; /* Allow wrapping on small screens */
+                gap: 20px; /* Space between items */
+            }
+            .feature-item {
+                text-align: center;
+                flex: 1 1 200px; /* Flex item grows/shrinks, min-width 200px */
+                max-width: 250px; /* Max width for each item */
+            }
+            .feature-item img {
+                height: 60px; /* Icon size */
+                margin-bottom: 10px;
+            }
+            .feature-item h6 {
+                font-weight: 600;
+                color: #333;
+                margin-bottom: 5px;
+            }
+            .feature-item p {
+                font-size: 0.85rem;
+                color: #6c757d;
+                margin-bottom: 0;
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                .profile-summary {
+                    flex-direction: column;
+                    text-align: center;
+                }
+                .profile-summary .avatar {
+                    margin-right: 0;
+                    margin-bottom: 15px;
+                }
+                /* Adjust top tabs for smaller screens */
+                .nav-tabs-custom {
+                    flex-direction: column; /* Stack tabs vertically */
+                    align-items: stretch; /* Stretch tabs to full width */
+                    padding: 10px;
+                }
+                .nav-tabs-custom .nav-link {
+                    margin: 5px 0; /* Vertical margin between stacked tabs */
+                    justify-content: center; /* Center content within stacked tabs */
+                }
+                .features-section {
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .feature-item {
+                    max-width: 90%;
+                }
+            }
+        </style>
+    </head>
+    <body onload="loadData();">
+
+
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="#"><img src="assets/images/mainlogo100.png" alt=""></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#artisans">Artisans</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    </ul>
+
+                    <div class="d-grid gap-2 d-md-block me-3" id="SSBtns">
+                        <a href="signIn.html" class="btn btn-outline-info">Sign In</a>
+                        <a href="signUp.html" class="btn btn-warning">Sign Up</a>
+
+                    </div>
+
+                    <div class="d-block">
+                        <a href="profile.html"><i class='bxr  bxs-user-circle fs-2'  style='color:#0044ff'></i> </a>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+
+
+        <!-- Main Content Area -->
+        <main class="main-content-area container-fluid">
+            <!-- Breadcrumbs -->
+            <div aria-label="breadcrumb" class="breadcrumb-custom">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">My Account</li>
+                </ol>
+            </div>
+
+            <!-- User Profile Summary -->
+            <div class="profile-summary mb-4">
+                <span class="avatar" role="img" id="proImage">👩‍🚀</span>
+                <div>
+                    <h4 id="userName">Hello, Name</h4>
+                    <p>Smart Trade Member Since Jul 2025</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Top Navigation Tabs -->
+                <div class="col-12 mb-4">
+                    <ul class="nav nav-tabs nav-tabs-custom justify-content-center" id="accountTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="account-details-tab" data-bs-toggle="tab" data-bs-target="#account-details-section" type="button" role="tab" aria-controls="account-details-section" aria-selected="true" data-section="account-details">
+                                <i class="fas fa-user"></i> Account Details
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="products-tab" data-bs-toggle="tab" data-bs-target="#products-section" type="button" role="tab" aria-controls="products-section" aria-selected="false" data-section="products">
+                                <i class="fas fa-box"></i> Products
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="product-listing-tab" data-bs-toggle="tab" data-bs-target="#product-listing-section" type="button" role="tab" aria-controls="product-listing-section" aria-selected="false" data-section="product-listing">
+                                <i class="fas fa-list-alt"></i> Product Listing
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders-section" type="button" role="tab" aria-controls="orders-section" aria-selected="false" data-section="orders">
+                                <i class="fas fa-shopping-bag"></i> Orders
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="addresses-tab" data-bs-toggle="tab" data-bs-target="#addresses-section" type="button" role="tab" aria-controls="addresses-section" aria-selected="false" data-section="addresses">
+                                <i class="fas fa-map-marker-alt"></i> Addresses
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="logout-tab" data-bs-toggle="tab" data-bs-target="#logout-section" type="button" role="tab" aria-controls="logout-section" aria-selected="false" data-section="logout">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Main Account Content Form -->
+                <div class="col-12">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active form-section" id="account-details-section" role="tabpanel" aria-labelledby="account-details-tab">
+                            <h5>Account Details</h5>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="Enter your first name">
+                                </div>
+                                <div class="col-md-6 mt-3 mt-md-0">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Enter your last name">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="addressLineOne" class="form-label">Address Line One</label>
+                                    <input type="text" class="form-control" id="addressLineOne" placeholder="Address Line One">
+                                </div>
+                                <div class="col-md-6 mt-3 mt-md-0">
+                                    <label for="addressLineTwo" class="form-label">Address Line Two</label>
+                                    <input type="text" class="form-control" id="addressLineTwo" placeholder="Address Line Two">
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label for="postalCode" class="form-label">Postal Code</label>
+                                    <input type="text" class="form-control" id="postalCode" placeholder="Postal Code">
+                                </div>
+                                <div class="col-md-6 mt-3 mt-md-0">
+
+                                    <label class="form-label" for="city">City</label>
+                                    <select id="city" class="form-control">
+                                        <option value="0">Select</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <h5 class="mt-4 mb-3">Password Change</h5>
+                            <div class="mb-3">
+                                <label for="currentPassword" class="form-label">Current Password</label>
+                                <input type="password" class="form-control" id="currentPassword" placeholder="Current Password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="newPassword" class="form-label">New Password</label>
+                                <input type="password" class="form-control" id="newPassword" placeholder="New Password">
+                            </div>
+                            <div class="mb-4">
+                                <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                                <input type="password" class="form-control" id="confirmNewPassword" placeholder="Confirm New Password">
+                            </div>
+
+                            <div class="d-grid col-md-4 mx-auto">
+                                <button type="submit" class="btn btn-primary btn-lg" id="saveChangesBtn" onclick="saveChanges();">Save Changes</button>
+                            </div>
+                        </div>
+
+                        <!-- Other sections (Products, Orders, etc.) as tab panes -->
+                        <div class="tab-pane fade form-section" id="products-section" role="tabpanel" aria-labelledby="products-tab">
+                            <h5>Products Section (Coming Soon)</h5>
+                            <p>This section will display your product listings.</p>
+                        </div>
+                        <div class="tab-pane fade form-section" id="product-listing-section" role="tabpanel" aria-labelledby="product-listing-tab">
+                            <h5>Product Listing Section (Coming Soon)</h5>
+                            <p>Manage your product listings here.</p>
+                        </div>
+                        <div class="tab-pane fade form-section" id="orders-section" role="tabpanel" aria-labelledby="orders-tab">
+                            <h5>Orders Section (Coming Soon)</h5>
+                            <p>View your order history.</p>
+                        </div>
+                        <div class="tab-pane fade form-section" id="addresses-section" role="tabpanel" aria-labelledby="addresses-tab">
+                            <h5>Addresses Section (Coming Soon)</h5>
+                            <p>Manage your shipping addresses.</p>
+                        </div>
+                        <div class="tab-pane fade form-section" id="logout-section" role="tabpanel" aria-labelledby="logout-tab">
+                            <h5>Logout</h5>
+                            <p>You will be logged out shortly.</p>
+                            <div class="d-grid col-md-4 mx-auto">
+                                <button type="button" class="btn btn-primary" id="confirmLogoutBtn" onclick="logOut();">Confirm Logout</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer-like Features Section -->
+        <footer class="features-section">
+            <div class="feature-item">
+                <img src="https://placehold.co/60x60/E0F7FA/00BCD4?text=🚚" alt="Fast Delivery Icon">
+                <h6>Fast & Secure Delivery</h6>
+                <p>Tell about your service.</p>
+            </div>
+            <div class="feature-item">
+                <img src="https://placehold.co/60x60/FFF3E0/FF9800?text=💰" alt="Money Back Icon">
+                <h6>Money Back Guarantee</h6>
+                <p>Within 10 days.</p>
+            </div>
+            <div class="feature-item">
+                <img src="https://placehold.co/60x60/E8F5E9/4CAF50?text=🔄" alt="Return Policy Icon">
+                <h6>24 Hour Return Policy</h6>
+                <p>No question ask.</p>
+            </div>
+            <div class="feature-item">
+                <img src="https://placehold.co/60x60/FBE9E7/FF5722?text=📞" alt="Support Icon">
+                <h6>Pro Quality Support</h6>
+                <p>24/7 Live support.</p>
+            </div>
+        </footer>
+
+        <!-- Bootstrap JS Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Custom JavaScript embedded here -->
+        <script>
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        const tabButtons = document.querySelectorAll('#accountTabs button[data-bs-toggle="tab"]');
+                                        const saveChangesBtn = document.getElementById('saveChangesBtn');
+                                        const confirmLogoutBtn = document.getElementById('confirmLogoutBtn'); // New logout button
+
+                                        // Function to show a custom message box
+                                        function showMessageBox(message) {
+                                            const messageBox = document.createElement('div');
+                                            messageBox.style.cssText = `
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background-color: white;
+                        padding: 25px;
+                        border-radius: 10px;
+                        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                        z-index: 1000;
+                        text-align: center;
+                        font-family: "Inter", sans-serif;
+                        max-width: 90%;
+                        width: 300px;
+                    `;
+
+                                            const messageText = document.createElement('p');
+                                            messageText.textContent = message;
+                                            messageText.style.marginBottom = '20px';
+
+                                            const closeButton = document.createElement('button');
+                                            closeButton.textContent = 'OK';
+                                            closeButton.style.cssText = `
+                        background-color: #0d6efd;
+                        color: white;
+                        border: none;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        font-size: 16px;
+                    `;
+                                            closeButton.onclick = () => messageBox.remove();
+
+                                            messageBox.appendChild(messageText);
+                                            messageBox.appendChild(closeButton);
+                                            document.body.appendChild(messageBox);
+                                        }
+
+                                        // Bootstrap's tab functionality handles showing/hiding panes
+                                        // We just need to add custom logic for specific actions like logout
+                                        tabButtons.forEach(button => {
+                                            button.addEventListener('shown.bs.tab', function (event) {
+                                                const section = this.dataset.section;
+                                                if (section === 'logout') {
+                                                    // Optionally trigger a different action or message when logout tab is shown
+                                                    // For now, the confirmLogoutBtn will handle the actual logout action
+                                                }
+                                            });
+                                        });
+
+                                        // Handle Save Changes button click
+                                        if (saveChangesBtn) {
+                                            saveChangesBtn.addEventListener('click', function (event) {
+                                                event.preventDefault(); // Prevent form submission for this demo
+                                                showMessageBox('Account details saved! (Data would be sent to server)');
+                                            });
+                                        }
+
+                                        // Handle Confirm Logout button click
+                                        if (confirmLogoutBtn) {
+                                            confirmLogoutBtn.addEventListener('click', function () {
+                                                showMessageBox('Logging out...');
+                                                // In a real app, you'd perform actual logout logic and redirect
+                                            });
+                                        }
+                                    });
+        </script>
+
+        <script src="assets/js/profile.js"></script>
+        <script src="assets/js/signOut.js"></script>
+        <script src="assets/js/script.js"></script>
+    </body>
+</html>
