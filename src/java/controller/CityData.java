@@ -32,7 +32,7 @@ public class CityData extends HttpServlet {
         Session s = sf.openSession();
         Criteria c = s.createCriteria(City.class);
         List<City> cityList = c.list();
-
+        
         Gson gson = new Gson();
         String toJson = gson.toJson(cityList);
         response.setContentType("application/json");

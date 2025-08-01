@@ -22,6 +22,31 @@ import javax.persistence.Table;
 @Table(name = "address")
 public class Address implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "line_1", nullable = false)
+    private String line_1;
+
+    @Column(name = "line_2", nullable = false)
+    private String line_2;
+
+    @Column(name = "postal_code", nullable = false)
+    private String postal_code;
+
+    @ManyToOne
+    @JoinColumn(name = "city_id", nullable = false)
+    private City city;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    public Address() {
+    }
+
     /**
      * @return the id
      */
@@ -105,30 +130,4 @@ public class Address implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
-
-    @Column(name = "line_1", nullable = false)
-    private String line_1;
-
-    @Column(name = "line_2", nullable = false)
-    private String line_2;
-
-    @Column(name = "postal_code", nullable = false)
-    private String postal_code;
-
-    @ManyToOne
-    @JoinColumn(name = "city_id", nullable = false)
-    private City city;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    public Address() {
-    }
-
 }

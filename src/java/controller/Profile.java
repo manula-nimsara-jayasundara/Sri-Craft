@@ -42,7 +42,7 @@ public class Profile extends HttpServlet {
             responseObject.addProperty("firstName", user.getFirstName());
             responseObject.addProperty("lastName", user.getLastName());
             responseObject.addProperty("password", user.getPassword());
-
+            
             String since = new SimpleDateFormat("MMM yyyy").format(user.getCreated_at());
             responseObject.addProperty("since", since);
 
@@ -51,7 +51,7 @@ public class Profile extends HttpServlet {
             Session s = sf.openSession();
             Criteria c = s.createCriteria(Address.class);
             c.add(Restrictions.eq("user", user));
-            if (!c.list().isEmpty()) {
+            if(!c.list().isEmpty()){
                 List<Address> addressList = c.list();
                 responseObject.add("addressList", gson.toJsonTree(addressList));
             }
